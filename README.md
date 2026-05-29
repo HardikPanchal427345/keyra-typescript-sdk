@@ -87,7 +87,7 @@ If you also run Java services, those may need the secret pair for `KeyraClient.b
 ```bash
 npm install @keyra/server-sdk
 # or from git
-npm install git+https://github.com/Ciright-Inc/keyra-server-sdk.git
+npm install git+https://github.com/HardikPanchal427345/keyra-typescript-sdk.git
 ```
 
 Local development:
