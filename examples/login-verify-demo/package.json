@@ -1,0 +1,18 @@
+{
+  "name": "keyra-login-verify-demo",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0 --port 4273",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0 --port 4273"
+  },
+  "dependencies": {
+    "@keyra/web-sdk": "git+https://github.com/Ciright-Inc/keyra-web-sdk.git"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2",
+    "vite": "^7.3.3"
+  }
+}

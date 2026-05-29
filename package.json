@@ -1,0 +1,38 @@
+{
+  "name": "@keyra/server-sdk",
+  "version": "0.1.0",
+  "description": "Backend-first TypeScript SDK for KEYRA verification infrastructure",
+  "license": "MIT",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ciright-Inc/keyra-server-sdk.git"
+  },
+  "homepage": "https://github.com/Ciright-Inc/keyra-server-sdk#readme",
+  "bugs": {
+    "url": "https://github.com/Ciright-Inc/keyra-server-sdk/issues"
+  },
+  "keywords": [
+    "keyra",
+    "verification",
+    "backend-sdk",
+    "typescript",
+    "2fa",
+    "oauth",
+    "pkce"
+  ],
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepare": "npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "typescript": "^5.9.2"
+  }
+}
