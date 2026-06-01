@@ -27,7 +27,7 @@ import {
 } from "./errors.js";
 
 export type Enable2FAOptions = { returnUrl?: string };
-export type StartAuthOptions = { nonce?: string };
+export type StartAuthOptions = { nonce?: string; returnUrl?: string };
 export type Disable2FAOptions = { reason?: string };
 export type WaitChallengeOptions = { timeoutMs?: number; intervalMs?: number };
 export type WaitEnrollmentOptions = { timeoutMs?: number; intervalMs?: number };
@@ -67,6 +67,7 @@ export class KeyraPartner2FA {
         projectId: this.client.projectId,
         externalUserId,
         nonce: opts.nonce,
+        returnUrl: opts.returnUrl,
       }),
     }).then(enrichChallengeSession);
   }

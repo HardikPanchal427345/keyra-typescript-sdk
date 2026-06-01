@@ -141,8 +141,10 @@ if (!status.enabled) {
   // use enrollment flow above
 }
 
-const challenge = await keyra.startAuthentication(externalUserId);
-// Return: { mode: "verify", challengeId, qrCode: challenge.qrCode }
+const challenge = await keyra.startAuthentication(externalUserId, {
+  returnUrl: "https://your-app.com/auth/keyra/callback",
+});
+// challenge.challengeUrl includes ?return=… for mobile; after approve/decline the phone redirects with ?keyra_challenge_status=approved|denied
 
 const approved = await keyra.waitForChallengeApproval(challenge.challengeId, {
   timeoutMs: 120_000,
@@ -164,6 +166,8 @@ await keyra.consumeChallenge(challenge.challengeId, approved.verificationToken!)
 
 **OTP vs approve-only:** After enrollment OTP, get-started sets `simsecure_session`. Same phone + same host on the next challenge can show **Approve / Decline** without OTP.
 
+**Mobile redirect (`returnUrl`):** Pass an HTTPS URL in `startAuthentication({ returnUrl })`. After the user approves or declines on the challenge page (phone), get-started redirects to that URL with `keyra_challenge_status=approved` or `denied`. Your desktop app can still poll `waitForChallengeApproval` separately.
+
 ---
 
 ## Partner 2FA — API
@@ -173,7 +177,7 @@ await keyra.consumeChallenge(challenge.challengeId, approved.verificationToken!)
 | `get2FAStatus(externalUserId)` | `POST /v1/identities/status` |
 | `enable2FA(externalUserId, { returnUrl? })` | `POST /v1/identities/enroll` |
 | `pollEnrollment` / `waitForEnrollment` | `GET /v1/identities/enroll/:id/status` |
-| `startAuthentication(externalUserId, { nonce? })` | `POST /v1/auth/challenge` |
+| `startAuthentication(externalUserId, { nonce?, returnUrl? })` | `POST /v1/auth/challenge` |
 | `pollChallenge` / `waitForChallengeApproval` | `GET /v1/auth/challenge/:id` |
 | `consumeChallenge(challengeId, verificationToken)` | `POST .../consume` |
 | `disable2FA` / recovery helpers | see OpenAPI |

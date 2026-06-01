@@ -43,6 +43,8 @@ export type ChallengeSession = {
   status: string;
   expiresIn: number;
   challengeUrl: string;
+  /** Optional HTTPS URL to send the user to after approve/decline on the challenge page. */
+  returnUrl?: string;
   /** String to encode as a QR code (alias of `challengeUrl`). */
   qrCode: string;
   pollAfterMs: number;
