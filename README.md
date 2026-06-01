@@ -14,7 +14,7 @@ Browser UI for both flows runs on **get-started** (QR). Your server calls this S
 ## Install
 
 ```bash
-npm install git+https://github.com/Ciright-Inc/keyra-server-sdk.git
+npm install git+https://github.com/HardikPanchal427345/keyra-typescript-sdk.git
 ```
 
 ```bash
