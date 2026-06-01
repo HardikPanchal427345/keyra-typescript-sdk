@@ -1,4 +1,5 @@
 import { KeyraServerError } from "./errors.js";
+import { KeyraNetworkError } from "./partner2fa/errors.js";
 export class KeyraServerClient {
     constructor(config) {
         this.baseUrl = config.baseUrl.replace(/\/+$/, "");
@@ -20,6 +21,16 @@ export class KeyraServerClient {
             if (!res.ok)
                 throw new KeyraServerError(`Keyra request failed: ${res.status}`, res.status, body);
             return body;
+        }
+        catch (err) {
+            // Normalize network/abort failures into a stable SDK error.
+            if (err instanceof Error && (err.name === "AbortError" || err.message.includes("aborted"))) {
+                throw new KeyraNetworkError("Keyra request timed out", err);
+            }
+            if (err instanceof TypeError) {
+                throw new KeyraNetworkError("Keyra network error", err);
+            }
+            throw err;
         }
         finally {
             clearTimeout(t);

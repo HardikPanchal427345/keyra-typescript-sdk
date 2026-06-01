@@ -29,7 +29,8 @@
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "test": "npm run build && node --test dist/partner2fa/__tests__/*.test.js"
   },
   "devDependencies": {
     "@types/node": "^22.13.10",
